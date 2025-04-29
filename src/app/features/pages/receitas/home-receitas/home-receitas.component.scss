@@ -1,0 +1,37 @@
+*{
+  overflow: hidden;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.toolbar {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.welcome-card {
+  width: 100%;
+  max-width: 500px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.botao-novo{
+  margin-right: 4px;
+}
