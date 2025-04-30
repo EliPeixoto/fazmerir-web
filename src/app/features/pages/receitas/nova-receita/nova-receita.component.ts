@@ -3,11 +3,26 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { ReceitasService } from '../../../../services/receitas.service';
 import { Router } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-nova-receita',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+     ReactiveFormsModule,
+     MatFormFieldModule,
+     MatInputModule,
+     MatDatepickerModule,
+     MatNativeDateModule,
+     MatIconModule,
+     MatButtonModule
+    ],
   templateUrl: './nova-receita.component.html'
 })
 export class NovaReceitaComponent {
@@ -39,4 +54,9 @@ export class NovaReceitaComponent {
       this.form.markAllAsTouched();
     }
   }
+
+  cancelar() {
+    this.router.navigate(['/lista-receitas']);
+  }
+
 }

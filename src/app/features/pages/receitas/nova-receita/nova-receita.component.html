@@ -2,35 +2,51 @@
   <h2 class="mb-4 text-primary">Cadastrar Nova Receita</h2>
 
   <form [formGroup]="form" (ngSubmit)="salvar()">
-    <div class="mb-3">
-      <label class="form-label">Valor da Receita</label>
-      <input type="number" class="form-control" formControlName="valorReceita" />
-      <div *ngIf="form.get('valorReceita')?.invalid && form.get('valorReceita')?.touched" class="text-danger">
-        Valor obrigatório e deve ser maior que zero.
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Valor da Receita</mat-label>
+          <input matInput type="number" formControlName="valorReceita" />
+        </mat-form-field>
+        <div *ngIf="form.get('valorReceita')?.invalid && form.get('valorReceita')?.touched" class="text-danger">
+          Valor obrigatório e deve ser maior que zero.
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Categoria</mat-label>
+          <input matInput type="text" formControlName="categoriaReceita" />
+        </mat-form-field>
       </div>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Data de Recebimento</label>
-      <input type="date" class="form-control" formControlName="dataRecebimento" />
-      <div *ngIf="form.get('dataRecebimento')?.invalid && form.get('dataRecebimento')?.touched" class="text-danger">
-        Data obrigatória.
+    <div class="row">
+      <div class="col-md-8 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Descrição</mat-label>
+          <input matInput type="text" formControlName="descricaoRecebimento" />
+        </mat-form-field>
+        <div *ngIf="form.get('descricaoRecebimento')?.invalid && form.get('descricaoRecebimento')?.touched"
+          class="text-danger">
+          Descrição obrigatória (mínimo 3 caracteres).
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Data de Recebimento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dataRecebimento">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
       </div>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Descrição</label>
-      <input type="text" class="form-control" formControlName="descricaoRecebimento" />
-      <div *ngIf="form.get('descricaoRecebimento')?.invalid && form.get('descricaoRecebimento')?.touched" class="text-danger">
-        Descrição obrigatória (mínimo 3 caracteres).
-      </div>
-    </div>
+    <button type="submit" class="btn btn-primary me-2">Salvar</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
 
-    <div class="mb-3">
-      <label class="form-label">Categoria</label>
-      <input type="text" class="form-control" formControlName="categoriaReceita" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Salvar</button>
   </form>
+
 </div>
