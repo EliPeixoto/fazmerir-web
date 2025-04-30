@@ -1,42 +1,51 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { getAuthConfig } from '../../auth.config';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private platformId = inject(PLATFORM_ID);
 
   constructor(private oauthService: OAuthService) {}
 
   initAuth() {
-    const authConfig: AuthConfig = {
-      issuer: 'http://localhost:8081/realms/fazmerir', // URL do seu Realm
-      redirectUri: window.location.origin,             // Retorna para onde seu app está rodando
-      clientId: 'fazmerir-backend',                     // Client ID do Keycloak
-      responseType: 'code',                             // Authorization Code Flow
-      scope: 'openid profile email',                    // Scopes que queremos
-      showDebugInformation: true,                       // Mostra logs no console (ajuda)
-      requireHttps: false                               // Se estiver em localhost
-    };
+    if (!isPlatformBrowser(this.platformId)) {
+      return Promise.resolve(); // SSR: não tenta autenticar
+    }
 
-    this.oauthService.configure(authConfig);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    this.oauthService.configure(getAuthConfig());
+
+    return this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      if (!this.oauthService.hasValidAccessToken()) {
+        this.login();
+      }
+    });
   }
 
   login() {
-    this.oauthService.initLoginFlow();
+    if (isPlatformBrowser(this.platformId)) {
+      this.oauthService.initLoginFlow();
+    }
   }
 
   logout() {
-    this.oauthService.logOut();
+    if (isPlatformBrowser(this.platformId)) {
+      this.oauthService.logOut();
+    }
   }
 
   get accessToken() {
-    return this.oauthService.getAccessToken();
+    return isPlatformBrowser(this.platformId)
+      ? this.oauthService.getAccessToken()
+      : '';
   }
 
   get identityClaims() {
-    return this.oauthService.getIdentityClaims();
+    return isPlatformBrowser(this.platformId)
+      ? this.oauthService.getIdentityClaims()
+      : null;
   }
 }

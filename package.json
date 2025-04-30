@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "dev:ssr": "ng run fazmerir-web:serve-ssr",
+    "build:ssr": "ng build && ng run fazmerir-web:server",
     "serve:ssr:fazmerir-web": "node dist/fazmerir-web/server/server.mjs"
   },
   "private": true,

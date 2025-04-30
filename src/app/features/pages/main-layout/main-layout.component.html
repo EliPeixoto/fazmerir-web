@@ -1,0 +1,28 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <mat-toolbar color="primary">FazMeRir</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/receitas" routerLinkActive="active">
+        <mat-icon>attach_money</mat-icon>
+        <span>Receitas</span>
+      </a>
+      <a mat-list-item routerLink="/lista-receitas" routerLinkActive="active">
+        <mat-icon>list</mat-icon>
+        <span>Lista</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="header-toolbar">
+      <span>Bem-vindo(a)!</span>
+    </mat-toolbar>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
