@@ -1,8 +1,15 @@
-<h1>Lista de Receitas</h1>
+<div class="container mt-4">
+  <h1 class="mb-4 text-primary">📋 Lista de Receitas</h1>
 
-<div *ngFor="let receita of list">
-  <h2>Valor da Receita: {{ receita.valorReceita }}</h2>
-  <h2>Descrição da Receita: {{ receita.descricaoRecebimento }}</h2>
-  <h2>Categoria da Receita: {{ receita.categoriaReceita }}</h2>
-  <hr>
+  <div class="row">
+    <div *ngFor="let receita of list" class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h5 class="card-title text-success fw-bold">💰 R$ {{ receita.valorReceita | number:'1.2-2' }}</h5>
+          <p class="card-text mb-1"><strong>📝 Descrição:</strong> {{ receita.descricaoRecebimento }}</p>
+          <p class="card-text"><strong>🏷️ Categoria:</strong> {{ receita.categoriaReceita || 'Não informada' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

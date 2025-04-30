@@ -28,3 +28,8 @@ a {
   display: flex;
   align-items: center;
 }
+
+.ms-4 {
+  margin-left: 1.5rem;
+}
+

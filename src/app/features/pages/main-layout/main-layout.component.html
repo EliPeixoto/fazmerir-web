@@ -1,20 +1,41 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav mode="side" opened class="sidenav">
     <mat-toolbar color="primary">FazMeRir</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
-        <mat-icon>dashboard</mat-icon>
-        <span>Dashboard</span>
-      </a>
-      <a mat-list-item routerLink="/receitas" routerLinkActive="active">
-        <mat-icon>attach_money</mat-icon>
-        <span>Receitas</span>
-      </a>
-      <a mat-list-item routerLink="/lista-receitas" routerLinkActive="active">
-        <mat-icon>list</mat-icon>
-        <span>Lista</span>
-      </a>
-    </mat-nav-list>
+
+    <div class="accordion" id="sidebarAccordion">
+
+      <!-- Dashboard direto -->
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header">
+          <a class="accordion-button collapsed py-2" routerLink="/dashboard" style="text-decoration: none;" role="button">
+            <mat-icon class="me-2">dashboard</mat-icon> Dashboard
+          </a>
+        </h2>
+      </div>
+
+      <!-- Receitas com submenu -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingReceitas">
+          <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReceitas" aria-expanded="false" aria-controls="collapseReceitas">
+            <mat-icon class="me-2">attach_money</mat-icon> Receitas
+          </button>
+        </h2>
+        <div id="collapseReceitas" class="accordion-collapse collapse" aria-labelledby="headingReceitas" data-bs-parent="#sidebarAccordion">
+          <div class="accordion-body py-1 ps-4">
+            <a routerLink="/nova-receita" class="d-block mb-2 text-decoration-none">
+              <mat-icon class="me-1">add</mat-icon> Nova Receita
+            </a>
+            <a routerLink="/lista-receitas" class="d-block text-decoration-none">
+              <mat-icon class="me-1">list</mat-icon> Lista de Receitas
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adicione outros menus aqui -->
+      <!-- ... -->
+
+    </div>
   </mat-sidenav>
 
   <mat-sidenav-content>

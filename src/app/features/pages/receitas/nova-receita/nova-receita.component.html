@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-primary">Cadastrar Nova Receita</h2>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()">
+    <div class="mb-3">
+      <label class="form-label">Valor da Receita</label>
+      <input type="number" class="form-control" formControlName="valorReceita" />
+      <div *ngIf="form.get('valorReceita')?.invalid && form.get('valorReceita')?.touched" class="text-danger">
+        Valor obrigatório e deve ser maior que zero.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Data de Recebimento</label>
+      <input type="date" class="form-control" formControlName="dataRecebimento" />
+      <div *ngIf="form.get('dataRecebimento')?.invalid && form.get('dataRecebimento')?.touched" class="text-danger">
+        Data obrigatória.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Descrição</label>
+      <input type="text" class="form-control" formControlName="descricaoRecebimento" />
+      <div *ngIf="form.get('descricaoRecebimento')?.invalid && form.get('descricaoRecebimento')?.touched" class="text-danger">
+        Descrição obrigatória (mínimo 3 caracteres).
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Categoria</label>
+      <input type="text" class="form-control" formControlName="categoriaReceita" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </form>
+</div>

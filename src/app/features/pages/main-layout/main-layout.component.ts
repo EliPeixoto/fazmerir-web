@@ -21,4 +21,10 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.css'],
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent {
+
+  receitasAberto = false;
+  toggleReceitas() {
+    this.receitasAberto = !this.receitasAberto;
+  }
+}
