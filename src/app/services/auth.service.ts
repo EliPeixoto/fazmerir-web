@@ -1,5 +1,5 @@
 import { Injectable, inject, PLATFORM_ID } from '@angular/core';
-import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { getAuthConfig } from '../../auth.config';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -19,8 +19,12 @@ export class AuthService {
     this.oauthService.configure(getAuthConfig());
 
     return this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
-      if (!this.oauthService.hasValidAccessToken()) {
-        this.login();
+      if (this.oauthService.hasValidAccessToken()) {
+        const token = this.oauthService.getAccessToken();
+        localStorage.setItem('token', token); // ✅ salva o token no navegador
+        console.log('Token salvo:', token);  // opcional
+      } else {
+        this.login(); // se não estiver autenticado, redireciona para o login
       }
     });
   }
@@ -34,6 +38,7 @@ export class AuthService {
   logout() {
     if (isPlatformBrowser(this.platformId)) {
       this.oauthService.logOut();
+      localStorage.removeItem('token'); // 🧼 limpa o token ao sair
     }
   }
 

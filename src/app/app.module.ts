@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './../app-routing.module';
 
 import { AuthService } from './services/auth.service';
-import { AuthInterceptor } from './shared/auth.interceptor';
+import { AuthInterceptor } from '../auth.interceptor';
 
 @NgModule({
   declarations: [

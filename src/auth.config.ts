@@ -4,10 +4,10 @@ export function getAuthConfig(): AuthConfig {
   return {
     issuer: 'http://localhost:8081/realms/fazmerir',
     redirectUri: typeof window !== 'undefined' ? window.location.origin : '', // safe check
-    clientId: 'fazmerir-backend',
+    clientId: 'fazmerir-frontend',
     responseType: 'code',
     scope: 'openid profile email',
     showDebugInformation: true,
-    strictDiscoveryDocumentValidation: false
+    strictDiscoveryDocumentValidation: false,
   };
 }
