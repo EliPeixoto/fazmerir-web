@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-primary">{{ isEditMode ? '✏️ Editar Receita' : '➕ Nova Receita' }}</h2>
+
+  <form [formGroup]="receitaForm" (ngSubmit)="salvar()">
+    <div class="mb-3">
+      <label for="valor" class="form-label">💰 Valor</label>
+      <input type="number" id="valor" class="form-control" formControlName="valorReceita">
+    </div>
+
+    <div class="mb-3">
+      <label for="descricao" class="form-label">📝 Descrição</label>
+      <input type="text" id="descricao" class="form-control" formControlName="descricaoRecebimento">
+    </div>
+
+    <div class="mb-3">
+      <label for="categoria" class="form-label">🏷️ Categoria</label>
+      <input type="text" id="categoria" class="form-control" formControlName="categoriaReceita">
+    </div>
+
+    <div class="mb-3">
+      <label for="dataRecebimento" class="form-label">📅 Data de Recebimento</label>
+      <input type="date" id="dataRecebimento" class="form-control" formControlName="dataRecebimento">
+    </div>
+    
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-secondary me-2" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Salvar Edição' : 'Cadastrar' }}</button>
+    </div>
+  </form>
+</div>

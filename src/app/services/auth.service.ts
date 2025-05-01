@@ -1,7 +1,7 @@
-import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { getAuthConfig } from '../../auth.config';
-import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -17,12 +17,13 @@ export class AuthService {
     }
 
     this.oauthService.configure(getAuthConfig());
+    this.oauthService.setStorage(localStorage);
 
     return this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       if (this.oauthService.hasValidAccessToken()) {
         const token = this.oauthService.getAccessToken();
         localStorage.setItem('token', token); // ✅ salva o token no navegador
-        console.log('Token salvo:', token);  // opcional
+        console.log('Token salvo:', token); // opcional
       } else {
         this.login(); // se não estiver autenticado, redireciona para o login
       }

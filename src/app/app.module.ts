@@ -12,19 +12,23 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { AppRoutingModule } from './../app-routing.module';
 import { AppComponent } from './app.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthInterceptor } from '../auth.interceptor';
+import { EditaReceitasComponent } from './features/pages/receitas/edita-receitas/edita-receitas.component';
+import { ReceitasListaComponent } from './features/pages/receitas/lista-receitas/receitas-lista.component';
 import { AuthService } from './services/auth.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, EditaReceitasComponent, ReceitasListaComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,

@@ -20,4 +20,8 @@ export class ReceitasService {
   salvarReceita(receita: Receita): Observable<any> {
     return this.http.post(this.API, receita);
   }
+
+  atualizarReceita(id: number, receita: any): Observable<any> {
+    return this.http.put(`${this.API}/${id}`, receita);
+  }
 }

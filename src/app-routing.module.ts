@@ -7,6 +7,7 @@ import { MainLayoutComponent } from './app/features/pages/main-layout/main-layou
 import { HomeReceitasComponent } from './app/features/pages/receitas/home-receitas/home-receitas.component';
 import { ReceitasListaComponent } from './app/features/pages/receitas/lista-receitas/receitas-lista.component';
 import { NovaReceitaComponent } from './app/features/pages/receitas/nova-receita/nova-receita.component';
+import { EditaReceitasComponent } from './app/features/pages/receitas/edita-receitas/edita-receitas.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'receitas', component: HomeReceitasComponent },
       { path: 'nova-receita', component: NovaReceitaComponent },
       { path: 'lista-receitas', component: ReceitasListaComponent },
+      { path: 'receitas/editar', component: EditaReceitasComponent },
     ],
   },
   { path: '**', redirectTo: '' },

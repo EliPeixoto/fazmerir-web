@@ -1,18 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Receita } from '../../../../models/receitas';
 import { ReceitasService } from '../../../../services/receitas.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-receitas-lista',
-  standalone: true,
-  imports: [CommonModule], 
   templateUrl: './receitas-lista.component.html',
-  styleUrls: ['./receitas-lista.component.scss'],
+  styleUrls: ['./receitas-lista.component.scss']
 })
 export class ReceitasListaComponent {
   list: Receita[] = [];
   receitasService = inject(ReceitasService);
+  router = inject(Router);
 
   constructor() {
     this.listarReceitas();
@@ -20,13 +20,21 @@ export class ReceitasListaComponent {
 
   listarReceitas() {
     this.receitasService.listarReceitas().subscribe({
-      next: lista => {
+      next: (lista) => {
         this.list = lista;
       },
-      error: erro => {
-        alert("Ocorreu algum erro");
-      }
+      error: (erro) => {
+        alert('Ocorreu algum erro');
+      },
     });
   }
-}
 
+  excluirReceita(receita: any) {
+    // lógica para excluir
+    console.log('Excluir', receita);
+  }
+
+  editarReceita(receita: any) {
+    this.router.navigate(['/receitas/editar'], { state: { receita } });
+  }
+}
