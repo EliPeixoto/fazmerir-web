@@ -9,6 +9,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nova-receita',
@@ -31,7 +32,8 @@ export class NovaReceitaComponent {
   constructor(
     private fb: FormBuilder,
     private receitasService: ReceitasService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
   ) {
     this.form = this.fb.group({
       valorReceita: [null, [Validators.required, Validators.min(0.01)]],
@@ -39,16 +41,18 @@ export class NovaReceitaComponent {
       descricaoRecebimento: ['', [Validators.required, Validators.minLength(3)]],
       categoriaReceita: ['']
     });
+
   }
 
   salvar() {
     if (this.form.valid) {
       this.receitasService.salvarReceita(this.form.value).subscribe({
+
         next: () => {
-          alert('Receita cadastrada com sucesso!');
+          this.toastr.success('Receita cadastrada com sucesso!');
           this.router.navigate(['/lista-receitas']);
         },
-        error: () => alert('Erro ao salvar receita.')
+        error: () => this.toastr.error('Erro ao salvar receita.')
       });
     } else {
       this.form.markAllAsTouched();
@@ -58,6 +62,7 @@ export class NovaReceitaComponent {
   cancelar() {
     this.router.navigate(['/lista-receitas']);
   }
+
 
 
 
