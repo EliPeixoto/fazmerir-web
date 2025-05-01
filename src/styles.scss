@@ -4,6 +4,26 @@
 }
 
 /* src/styles.scss */
+.accordion-button.static::after {
+  display: none !important;
+}
+
+.accordion-button.static {
+  cursor: pointer;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+
+.accordion-button.static,
+.accordion-button.static:focus,
+.accordion-button.static:active {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+  color: inherit; /* mantém cor padrão */
+}
 
 .modal-backdrop {
   --bs-backdrop-zindex: 0 !important;
@@ -12,7 +32,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: var(--bs-backdrop-zindex) !important;
+  z-index: var(--bs-backdrop-zindex);
   width: 100vw;
   height: 100vh;
   background-color: var(--bs-backdrop-bg);
