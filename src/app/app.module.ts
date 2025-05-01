@@ -21,6 +21,9 @@ import { AuthInterceptor } from '../auth.interceptor';
 import { EditaReceitasComponent } from './features/pages/receitas/edita-receitas/edita-receitas.component';
 import { ReceitasListaComponent } from './features/pages/receitas/lista-receitas/receitas-lista.component';
 import { AuthService } from './services/auth.service';
+import { ToastrModule } from 'ngx-toastr';
+
+
 
 @NgModule({
   declarations: [AppComponent, EditaReceitasComponent, ReceitasListaComponent],
@@ -38,7 +41,11 @@ import { AuthService } from './services/auth.service';
     MatNativeDateModule,
     MatToolbarModule,
     MatListModule,
-
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     OAuthModule.forRoot({
       resourceServer: {
         allowedUrls: ['http://localhost:8080'],

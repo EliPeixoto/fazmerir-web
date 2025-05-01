@@ -1,7 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ReceitasService } from './../../../../services/receitas.service';
+
+
 
 @Component({
   selector: 'app-edita-receitas',
@@ -17,7 +20,8 @@ export class EditaReceitasComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -49,22 +53,22 @@ export class EditaReceitasComponent implements OnInit {
           .atualizarReceita(this.receitaId, formValue)
           .subscribe({
             next: () => {
-              alert('Receita atualizada com sucesso!');
+             this.toastr.success('Receita atualizada com sucesso!');
               this.router.navigate(['/lista-receitas']);
             },
             error: () => {
-              alert('Erro ao atualizar receita.');
+              this.toastr.error('Erro ao atualizar receita.');
             },
           });
       } else {
         // Se estiver criando nova receita
         this.receitasService.salvarReceita(formValue).subscribe({
           next: () => {
-            alert('Receita cadastrada com sucesso!');
+            this.toastr.success('Receita cadastrada com sucesso!');
             this.router.navigate(['/lista-receitas']);
           },
           error: () => {
-            alert('Erro ao cadastrar receita.');
+            this.toastr.error('Erro ao cadastrar receita.');
           },
         });
       }
@@ -72,6 +76,6 @@ export class EditaReceitasComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['/receitas']);
+    this.router.navigate(['/lista-receitas']);
   }
 }

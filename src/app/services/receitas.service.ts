@@ -24,4 +24,9 @@ export class ReceitasService {
   atualizarReceita(id: number, receita: any): Observable<any> {
     return this.http.put(`${this.API}/${id}`, receita);
   }
+
+  deletarReceita(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API}/${id}`);
+  }
+
 }
