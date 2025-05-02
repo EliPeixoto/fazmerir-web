@@ -25,6 +25,10 @@ export class ReceitasService {
     return this.http.put(`${this.API}/${id}`, receita);
   }
 
+  alterarStatus(id: number): Observable<any> {
+    return this.http.put<any>(`${this.API}/altera-status/${id}`, {});
+  }
+
   deletarReceita(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
   }

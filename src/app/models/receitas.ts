@@ -3,4 +3,5 @@ export interface Receita {
   valorReceita: number;
   descricaoRecebimento: string;
   categoriaReceita: string;
+  statusReceita: 'RECEBIDO' | 'PENDENTE';
 }

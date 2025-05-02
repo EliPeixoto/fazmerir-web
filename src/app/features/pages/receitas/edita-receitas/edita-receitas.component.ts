@@ -1,10 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ReceitasService } from './../../../../services/receitas.service';
-
-
 
 @Component({
   selector: 'app-edita-receitas',
@@ -21,7 +20,7 @@ export class EditaReceitasComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +28,8 @@ export class EditaReceitasComponent implements OnInit {
       valorReceita: ['', Validators.required],
       descricaoRecebimento: ['', Validators.required],
       categoriaReceita: [''],
-      dataRecebimento: ['', Validators.required]
+      dataRecebimento: ['', Validators.required],
+      statusReceita: ['PENDENTE'],
     });
 
     const receitaData = history.state.receita;
@@ -44,7 +44,7 @@ export class EditaReceitasComponent implements OnInit {
     if (this.receitaForm.valid) {
       const formValue = {
         ...this.receitaForm.value,
-        id: this.receitaId
+        id: this.receitaId,
       };
 
       if (this.isEditMode && this.receitaId != null) {
@@ -53,7 +53,7 @@ export class EditaReceitasComponent implements OnInit {
           .atualizarReceita(this.receitaId, formValue)
           .subscribe({
             next: () => {
-             this.toastr.success('Receita atualizada com sucesso!');
+              this.toastr.success('Receita atualizada com sucesso!');
               this.router.navigate(['/lista-receitas']);
             },
             error: () => {
@@ -72,6 +72,24 @@ export class EditaReceitasComponent implements OnInit {
           },
         });
       }
+    }
+  }
+
+  onToggleStatus(event: MatSlideToggleChange): void {
+    if (this.isEditMode && this.receitaId) {
+      // edição → atualiza no backend
+      this.receitasService.alterarStatus(this.receitaId).subscribe({
+        next: (res) => {
+          this.receitaForm.patchValue({ statusReceita: res.statusReceita });
+        },
+        error: () => {
+          this.toastr.error('Erro ao alterar o status.');
+        },
+      });
+    } else {
+      // cadastro → apenas altera localmente o valor no form
+      const novoStatus = event.checked ? 'RECEBIDO' : 'PENDENTE';
+      this.receitaForm.patchValue({ statusReceita: novoStatus });
     }
   }
 

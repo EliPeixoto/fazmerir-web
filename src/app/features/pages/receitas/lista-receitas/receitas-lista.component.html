@@ -8,6 +8,7 @@
           <th>💰 Valor</th>
           <th>📝 Descrição</th>
           <th>🏷️ Categoria</th>
+          <th>📌 Status</th>
           <th class="text-center">⚙️ Ações</th>
         </tr>
       </thead>
@@ -16,6 +17,15 @@
           <td class="text-success fw-bold">R$ {{ receita.valorReceita | number:'1.2-2' }}</td>
           <td>{{ receita.descricaoRecebimento }}</td>
           <td>{{ receita.categoriaReceita || 'Não informada' }}</td>
+          <td>
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-success': receita.statusReceita === 'RECEBIDO',
+                    'bg-warning text-dark': receita.statusReceita === 'PENDENTE'
+                  }">
+              {{ receita.statusReceita }}
+            </span>
+          </td>
           <td class="text-center">
             <button class="btn btn-sm btn-outline-primary me-2" (click)="editarReceita(receita)">
               <i class="bi bi-pencil"></i>
@@ -27,7 +37,7 @@
         </tr>
       </tbody>
     </table>
-  </div> 
+  </div>
 
   <!-- Modal -->
   <div class="modal fade" id="confirmarExclusaoModal" tabindex="-1" aria-hidden="true">

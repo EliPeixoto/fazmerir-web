@@ -22,6 +22,7 @@ import { EditaReceitasComponent } from './features/pages/receitas/edita-receitas
 import { ReceitasListaComponent } from './features/pages/receitas/lista-receitas/receitas-lista.component';
 import { AuthService } from './services/auth.service';
 import { ToastrModule } from 'ngx-toastr';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -34,6 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatSlideToggleModule,
     MatSidenavModule,
     MatDatepickerModule,
     MatFormFieldModule,

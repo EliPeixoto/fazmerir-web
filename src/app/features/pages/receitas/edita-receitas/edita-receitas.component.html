@@ -2,26 +2,55 @@
   <h2 class="mb-4 text-primary">{{ isEditMode ? '✏️ Editar Receita' : '➕ Nova Receita' }}</h2>
 
   <form [formGroup]="receitaForm" (ngSubmit)="salvar()">
-    <div class="mb-3">
-      <label for="valor" class="form-label">💰 Valor</label>
-      <input type="number" id="valor" class="form-control" formControlName="valorReceita">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Valor da Receita</mat-label>
+          <input matInput type="number" formControlName="valorReceita" />
+        </mat-form-field>
+        <div *ngIf="receitaForm.get('valorReceita')?.invalid && receitaForm.get('valorReceita')?.touched" class="text-danger">
+          Valor obrigatório e deve ser maior que zero.
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Categoria</mat-label>
+          <input matInput type="text" formControlName="categoriaReceita" />
+        </mat-form-field>
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label for="descricao" class="form-label">📝 Descrição</label>
-      <input type="text" id="descricao" class="form-control" formControlName="descricaoRecebimento">
+    <div class="row">
+      <div class="col-md-8 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Descrição</mat-label>
+          <input matInput type="text" formControlName="descricaoRecebimento" />
+        </mat-form-field>
+        <div *ngIf="receitaForm.get('descricaoRecebimento')?.invalid && receitaForm.get('descricaoRecebimento')?.touched"
+             class="text-danger">
+          Descrição obrigatória (mínimo 3 caracteres).
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Data de Recebimento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dataRecebimento">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4 mb-3 d-flex align-items-center">
+        <mat-slide-toggle color="primary"
+                          [checked]="receitaForm.get('statusReceita')?.value === 'RECEBIDO'"
+                          (change)="onToggleStatus($event)">
+          {{ receitaForm.get('statusReceita')?.value === 'RECEBIDO' ? 'Recebido' : 'Pendente' }}
+        </mat-slide-toggle>
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label for="categoria" class="form-label">🏷️ Categoria</label>
-      <input type="text" id="categoria" class="form-control" formControlName="categoriaReceita">
-    </div>
-
-    <div class="mb-3">
-      <label for="dataRecebimento" class="form-label">📅 Data de Recebimento</label>
-      <input type="date" id="dataRecebimento" class="form-control" formControlName="dataRecebimento">
-    </div>
-    
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-secondary me-2" (click)="cancelar()">Cancelar</button>
       <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Salvar Edição' : 'Cadastrar' }}</button>

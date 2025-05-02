@@ -42,6 +42,18 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
+      <div class="col-md-4 mb-3 d-flex flex-column justify-content-start">
+        <label class="form-label mb-2"> Status da Receita</label>
+        <div class="d-flex align-items-center">
+          <input type="checkbox" id="statusToggle" class="cbx hidden"
+            [checked]="form.get('statusReceita')?.value === 'RECEBIDO'" (change)="onToggleStatus($event)" />
+          <label for="statusToggle" class="lbl"></label>
+          <span class="ms-2 fw-semibold">
+            {{ form.get('statusReceita')?.value === 'RECEBIDO' ? 'Recebido' : 'Pendente' }}
+          </span>
+        </div>
+      </div>
+
     </div>
 
     <button type="submit" class="btn btn-primary me-2">Salvar</button>
