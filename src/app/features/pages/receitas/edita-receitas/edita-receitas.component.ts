@@ -31,14 +31,27 @@ export class EditaReceitasComponent implements OnInit {
       statusReceita: ['PENDENTE'],
     });
 
-    const receitaData =
-      this.router.getCurrentNavigation()?.extras?.state?.['receita'];
-    if (receitaData) {
-      this.isEditMode = true;
-      this.receitaId = receitaData.id;
-      this.receitaForm.patchValue(receitaData);
-    }
+    // Pegando ID da rota
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get('id');
+      if (idParam) {
+        this.receitaId = +idParam;
+        this.isEditMode = true;
+
+        this.receitasService.buscarReceitaPorId(this.receitaId).subscribe({
+          next: (receita) => {
+            console.log('Receita carregada:', receita);
+            this.receitaForm.patchValue(receita);
+          },
+          error: () => {
+            this.toastr.error('Erro ao carregar receita.');
+          }
+        });
+      }
+    });
   }
+
+
 
   salvar() {
     if (this.receitaForm.valid) {

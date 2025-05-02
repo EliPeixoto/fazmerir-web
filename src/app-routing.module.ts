@@ -19,7 +19,8 @@ const routes: Routes = [
       { path: 'receitas', component: HomeReceitasComponent },
       { path: 'nova-receita', component: NovaReceitaComponent },
       { path: 'lista-receitas', component: ReceitasListaComponent },
-      { path: 'receitas/editar', component: EditaReceitasComponent },
+      { path: 'receitas/editar/:id', component: EditaReceitasComponent }
+
     ],
   },
   { path: '**', redirectTo: '' },

@@ -62,6 +62,8 @@ export class ReceitasListaComponent {
   }
 
   editarReceita(receita: Receita): void {
-    this.router.navigate(['/receitas/editar'], { state: { receita } });
+    this.router.navigate(['/receitas/editar', receita.id], { state: { receita } });
   }
+
+
 }

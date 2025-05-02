@@ -33,4 +33,10 @@ export class ReceitasService {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
 
+  buscarReceitaPorId(id: number) {
+    return this.http.get<Receita>(`${this.API}/${id}`);
+  }
+
+
+
 }
