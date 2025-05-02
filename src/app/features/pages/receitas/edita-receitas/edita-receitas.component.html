@@ -42,13 +42,23 @@
         </mat-form-field>
       </div>
 
-      <div class="col-md-4 mb-3 d-flex align-items-center">
-        <mat-slide-toggle color="primary"
-                          [checked]="receitaForm.get('statusReceita')?.value === 'RECEBIDO'"
-                          (change)="onToggleStatus($event)">
-          {{ receitaForm.get('statusReceita')?.value === 'RECEBIDO' ? 'Recebido' : 'Pendente' }}
-        </mat-slide-toggle>
+      <div class="col-md-4 mb-3 d-flex flex-column justify-content-start">
+        <label class="form-label mb-2">📌 Status da Receita</label>
+        <div class="d-flex align-items-center gap-2">
+          <input
+            type="checkbox"
+            id="statusToggle"
+            class="cbx hidden"
+            [checked]="receitaForm.get('statusReceita')?.value === 'RECEBIDO'"
+            (change)="onCustomToggle($event)"
+          />
+          <label for="statusToggle" class="lbl"></label>
+          <span class="ms-2 fw-semibold">
+            {{ receitaForm.get('statusReceita')?.value === 'RECEBIDO' ? 'Recebido' : 'Pendente' }}
+          </span>
+        </div>
       </div>
+
     </div>
 
     <div class="d-flex justify-content-end">

@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ReceitasService } from './../../../../services/receitas.service';
@@ -32,7 +31,8 @@ export class EditaReceitasComponent implements OnInit {
       statusReceita: ['PENDENTE'],
     });
 
-    const receitaData = history.state.receita;
+    const receitaData =
+      this.router.getCurrentNavigation()?.extras?.state?.['receita'];
     if (receitaData) {
       this.isEditMode = true;
       this.receitaId = receitaData.id;
@@ -75,9 +75,11 @@ export class EditaReceitasComponent implements OnInit {
     }
   }
 
-  onToggleStatus(event: MatSlideToggleChange): void {
+  onCustomToggle(event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+    const status = checked ? 'RECEBIDO' : 'PENDENTE';
+
     if (this.isEditMode && this.receitaId) {
-      // edição → atualiza no backend
       this.receitasService.alterarStatus(this.receitaId).subscribe({
         next: (res) => {
           this.receitaForm.patchValue({ statusReceita: res.statusReceita });
@@ -87,9 +89,7 @@ export class EditaReceitasComponent implements OnInit {
         },
       });
     } else {
-      // cadastro → apenas altera localmente o valor no form
-      const novoStatus = event.checked ? 'RECEBIDO' : 'PENDENTE';
-      this.receitaForm.patchValue({ statusReceita: novoStatus });
+      this.receitaForm.patchValue({ statusReceita: status });
     }
   }
 
