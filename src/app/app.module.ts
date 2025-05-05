@@ -13,20 +13,26 @@ import { AppRoutingModule } from './../app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule, MatCardTitle } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from '../auth.interceptor';
+import { DashboardComponent } from './features/pages/dashboard/dashboard.component';
 import { EditaReceitasComponent } from './features/pages/receitas/edita-receitas/edita-receitas.component';
 import { ReceitasListaComponent } from './features/pages/receitas/lista-receitas/receitas-lista.component';
+
 import { AuthService } from './services/auth.service';
-import { ToastrModule } from 'ngx-toastr';
-
-
 
 @NgModule({
-  declarations: [AppComponent, EditaReceitasComponent, ReceitasListaComponent],
+  declarations: [
+    AppComponent,
+    EditaReceitasComponent,
+    ReceitasListaComponent,
+    DashboardComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,6 +47,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatNativeDateModule,
     MatToolbarModule,
     MatListModule,
+    MatCardModule,
+    MatCardTitle,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
