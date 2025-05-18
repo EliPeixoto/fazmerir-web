@@ -1,24 +1,39 @@
-import { Component, OnInit  } from '@angular/core';
-import { DashboardService, SaldoTotalResponse  } from './../../../services/dashboard.service';
+import { Component, OnInit } from '@angular/core';
+import { SaldoTotalResponse } from '../../../models/saldo-total-response';
+import { DashboardService } from './../../../services/dashboard.service';
+import { ReceitasService } from './../../../services/receitas.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
+  valorTotal = 0;
+  totalReceitas = 0;
+  totalDespesas = 0;
+  atualizadoEm: Date | null = null;
 
-  saldoTotal: number = 0;
-  totalReceitas: number = 0;
-  saldoManual: number = 0;
-
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService,  private receitasService: ReceitasService ) {}
 
   ngOnInit(): void {
-    this.dashboardService.getSaldoTotal().subscribe((data: SaldoTotalResponse) => {
-      this.totalReceitas = data.totalReceitas;
-      this.saldoManual = data.totalSaldoManual;
-      this.saldoTotal = data.saldoTotal;
-    });
+    this.dashboardService
+      .getResumoFinanceiro()
+      .subscribe((data: SaldoTotalResponse) => {
+        this.valorTotal = data.valorTotal;
+        this.totalDespesas = data.totalDespesas;
+        this.atualizadoEm = new Date(data.atualizadoEm);
+      });
+
+
+     this.receitasService.listarReceitas().subscribe({
+  next: (valor: number) => {
+    console.log('TOTAL RECEITAS:', valor); // ver se está vindo
+    this.totalReceitas = valor;
+  },
+  error: (err) => {
+    console.error('Erro ao buscar total de receitas', err);
+  }
+});
   }
 }
