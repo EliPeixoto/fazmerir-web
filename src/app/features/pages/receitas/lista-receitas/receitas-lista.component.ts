@@ -12,7 +12,7 @@ declare var bootstrap: any;
   styleUrls: ['./receitas-lista.component.scss'],
 })
 export class ReceitasListaComponent {
-  list: Receita[] = [];
+  list: number | undefined;
   receitaSelecionada?: Receita;
   modalInstance?: any;
 

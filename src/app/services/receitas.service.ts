@@ -13,8 +13,8 @@ export class ReceitasService {
 
   constructor() {}
 
-  listarReceitas(): Observable<Receita[]> {
-    return this.http.get<Receita[]>(this.API);
+  listarReceitas(): Observable<number> {
+    return this.http.get<number>(`${this.API}/soma-recebido`);
   }
 
   salvarReceita(receita: Receita): Observable<any> {
@@ -28,5 +28,4 @@ export class ReceitasService {
   deletarReceita(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
-
 }
