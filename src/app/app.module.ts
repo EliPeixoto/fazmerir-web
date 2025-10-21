@@ -20,18 +20,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from '../auth.interceptor';
-import { DashboardComponent } from './features/pages/dashboard/dashboard.component';
-import { EditaReceitasComponent } from './features/pages/receitas/edita-receitas/edita-receitas.component';
-import { ReceitasListaComponent } from './features/pages/receitas/lista-receitas/receitas-lista.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatButtonModule} from '@angular/material/button';
+
+
+
+
 
 import { AuthService } from './services/auth.service';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    EditaReceitasComponent,
-    ReceitasListaComponent,
-    DashboardComponent
+    AppComponent
+
   ],
   imports: [
     BrowserModule,
@@ -41,6 +43,8 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,
+    MatCardModule,
+    MatButtonModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
@@ -49,6 +53,7 @@ import { AuthService } from './services/auth.service';
     MatListModule,
     MatCardModule,
     MatCardTitle,
+    MatSlideToggleModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
@@ -73,6 +78,7 @@ import { AuthService } from './services/auth.service';
       deps: [AuthService],
       multi: true,
     },
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })
