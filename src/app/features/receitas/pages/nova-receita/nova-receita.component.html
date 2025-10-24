@@ -1,1 +1,53 @@
-<p>nova-receita works!!</p>
+<form class="row g-2">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <mat-icon class="text-primary me-2 style=" cursor:pointer;>add</mat-icon>
+      <a class="titulo-nova-receita navbar-brand">Nova Receita</a>
+    </nav>
+
+
+  </div>
+
+  <div class="col-md-4">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Valor Receita</mat-label>
+      <input matInput type="email" [(ngModel)]="valorReceita" name="valorReceita" />
+    </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field>
+      <mat-label>Data Recebimento</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="dataRecebimento" name="dataRecebimento"
+        (click)="picker.open()">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </div>
+  <div class="col-8">
+    <mat-form-field appearance="outline" class="full-width">
+  <mat-label>Descrição</mat-label>
+  <input matInput type="text" [(ngModel)]="descricao" name="descricao" />
+</mat-form-field>
+  </div>
+  <div class="col-8">
+   <mat-form-field appearance="outline" class="full-width">
+  <mat-label>Categoria</mat-label>
+ <input type="text" matInput [(ngModel)]="categoria" name="categoria"> <!-- colocar input com opcoes -->
+</mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <label for="inputStatus" class="form-label">Status</label>
+    <p>
+      <mat-slide-toggle name="status" [(ngModel)]="status">
+        {{ status ? 'Recebido' : 'Pendente' }}
+      </mat-slide-toggle>
+    </p>
+  </div>
+  <div class="col-md-12" style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+    <button mat-raised-button color="primary">Cadastrar</button>
+    <button mat-stroked-button class="btn-limpar">Limpar</button>
+    <button mat-flat-button class="btn-cancelar" type="button">Cancelar</button>
+  </div>
+
+</form>

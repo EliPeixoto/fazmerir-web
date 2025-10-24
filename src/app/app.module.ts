@@ -22,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from '../auth.interceptor';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -54,6 +55,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatCardModule,
     MatCardTitle,
     MatSlideToggleModule,
+    MatIconModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
